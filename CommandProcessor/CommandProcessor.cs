@@ -10,8 +10,6 @@ namespace CommandLibraries
 
         private Dictionary<int, List<int>> frequencies = new Dictionary<int, List<int>>();//[num,v]
 
-        private Dictionary<int, int> dataFrequencies = new Dictionary<int, int>();//[v,num]
-
         private Dictionary<int, Action<int, List<int>>> commands;
 
         public CommandProcessor()
