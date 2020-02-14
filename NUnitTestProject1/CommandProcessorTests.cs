@@ -1,16 +1,14 @@
-using CommandLibraries;
-using NUnit.Framework;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
-using System.Runtime.InteropServices.ComTypes;
+using CommandLibraries;
+using NUnit.Framework;
 
 namespace Tests
 {
-
-    public class FreqTests
+    public class CommandProcessorTests
     {
 
         [Test]
@@ -65,14 +63,14 @@ namespace Tests
         public void Test1()
         {
             var input = new List<List<int>>{
-                    new List<int>() { 1, 1 },
-                    new List<int>() { 2, 2 },
-                    new List<int>() { 3, 2 },
-                    new List<int>() { 1, 1 },
-                    new List<int>() { 1, 1 },
-                    new List<int>() { 2, 1 },
-                    new List<int>() { 3, 2 }
-                };
+                new List<int>() { 1, 1 },
+                new List<int>() { 2, 2 },
+                new List<int>() { 3, 2 },
+                new List<int>() { 1, 1 },
+                new List<int>() { 1, 1 },
+                new List<int>() { 2, 1 },
+                new List<int>() { 3, 2 }
+            };
 
             var expOutput = new List<int> { 0, 1 };
 
