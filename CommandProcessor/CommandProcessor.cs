@@ -86,13 +86,13 @@ namespace CommandLibraries
             {
                 currentState[valueToAdd] = 1;
 
-                if (frequencies.ContainsKey(freq + 1))
+                if (frequencies.ContainsKey(1))
                 {
-                    frequencies[freq + 1].Add(valueToAdd);
+                    frequencies[1].Add(valueToAdd);
                 }
                 else
                 {
-                    frequencies[freq + 1] = new List<int> { valueToAdd };
+                    frequencies[1] = new List<int> { valueToAdd };
                 }
             }
         }
