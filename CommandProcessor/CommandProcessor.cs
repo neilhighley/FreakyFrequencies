@@ -7,7 +7,7 @@ namespace CommandLibraries
     {
         private Dictionary<int, int> currentState = new Dictionary<int, int>();
 
-        private Dictionary<int, HashSet<int>> frequencies = new Dictionary<int, HashSet<int>>();//[num,v]
+        private Dictionary<int, HashSet<int>> frequencies = new Dictionary<int, HashSet<int>>();
 
         private Dictionary<int, Action<int, List<int>>> commands;
 
