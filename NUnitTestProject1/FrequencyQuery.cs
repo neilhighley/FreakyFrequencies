@@ -81,8 +81,8 @@ namespace Tests
             CollectionAssert.AreEqual(expOutput, processor.ProcessQueries(input));
         }
 
-        private const string bigDataInputResourceName = @"NUnitTestProject1.biginput.txt";
-        private const string bigDataOutputResourceName = @"NUnitTestProject1.bigoutput.txt";
+        private const string bigDataInputResourceName = @"NUnitTestProject1.TestData.biginput.txt";
+        private const string bigDataOutputResourceName = @"NUnitTestProject1.TestData.bigoutput.txt";
         private const string input00ResourceName = @"NUnitTestProject1.TestData.input00.txt";
         private const string output00ResourceName = @"NUnitTestProject1.TestData.output00.txt";
         private const string input01ResourceName = @"NUnitTestProject1.TestData.input01.txt";
