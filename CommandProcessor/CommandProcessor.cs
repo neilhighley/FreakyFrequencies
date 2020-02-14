@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace CommandLibraries
 {
@@ -42,6 +43,7 @@ namespace CommandLibraries
             queries.ForEach(
                 q =>
                 {
+                    if(IsValidQuery(q))
                     commands[q[0]](
                         q[1],
                         results);
@@ -50,7 +52,16 @@ namespace CommandLibraries
             return results;
         }
 
+        private bool IsValidQuery(List<int> query)
+        {
+            if (query.Count != 2) return false;
 
+            if (query[0] < 1) return false;
+
+            if (query[0] > 3) return false;
+
+            return true;
+        }
         private void AddValue(int valueToAdd, List<int> results)
         {
             int freq;

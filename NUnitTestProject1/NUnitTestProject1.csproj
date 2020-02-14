@@ -7,12 +7,24 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="input07.txt" />
-    <None Remove="output07.txt" />
+    <None Remove="biginput.txt" />
+    <None Remove="bigoutput.txt" />
+    <None Remove="input00.txt" />
+    <None Remove="output00.txt" />
+    <None Remove="TestData\input01.txt" />
+    <None Remove="TestData\input14.txt" />
+    <None Remove="TestData\output01.txt" />
+    <None Remove="TestData\output14.txt" />
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Include="output07.txt" />
+    <EmbeddedResource Include="TestData\bigoutput.txt" />
+    <EmbeddedResource Include="TestData\input14.txt" />
+    <EmbeddedResource Include="TestData\input01.txt" />
+    <EmbeddedResource Include="TestData\output14.txt" />
+    <EmbeddedResource Include="TestData\output01.txt" />
+    <EmbeddedResource Include="TestData\output00.txt" />
+    <EmbeddedResource Include="TestData\input00.txt" />
   </ItemGroup>
 
   <ItemGroup>
@@ -29,7 +41,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Include="input07.txt" />
+    <EmbeddedResource Include="TestData\biginput.txt" />
   </ItemGroup>
 
 </Project>
