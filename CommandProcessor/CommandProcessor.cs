@@ -7,9 +7,7 @@ namespace CommandLibraries
     {
         private Dictionary<int, int> currentState = new Dictionary<int, int>();
 
-        private Dictionary<int, List<int>> frequencies = new Dictionary<int, List<int>>();//[num,v]
-
-        private Dictionary<int, int> dataFrequencies = new Dictionary<int, int>();//[v,num]
+        private Dictionary<int, HashSet<int>> frequencies = new Dictionary<int, HashSet<int>>();
 
         private Dictionary<int, Action<int, List<int>>> commands;
 
@@ -42,6 +40,7 @@ namespace CommandLibraries
             queries.ForEach(
                 q =>
                 {
+                    if(IsValidQuery(q))
                     commands[q[0]](
                         q[1],
                         results);
@@ -50,7 +49,16 @@ namespace CommandLibraries
             return results;
         }
 
+        private bool IsValidQuery(List<int> query)
+        {
+            if (query.Count != 2) return false;
 
+            if (query[0] < 1) return false;
+
+            if (query[0] > 3) return false;
+
+            return true;
+        }
         private void AddValue(int valueToAdd, List<int> results)
         {
             int freq;
@@ -60,6 +68,7 @@ namespace CommandLibraries
                 out freq))
             {
                 frequencies[freq].Remove(valueToAdd);
+
                 currentState[valueToAdd] = freq + 1;
 
                 if (frequencies.ContainsKey(freq + 1))
@@ -68,20 +77,20 @@ namespace CommandLibraries
                 }
                 else
                 {
-                    frequencies[freq + 1] = new List<int> { valueToAdd };
+                    frequencies[freq + 1] = new HashSet<int>(){ valueToAdd };
                 }
             }
             else
             {
                 currentState[valueToAdd] = 1;
 
-                if (frequencies.ContainsKey(freq + 1))
+                if (frequencies.ContainsKey(1))
                 {
-                    frequencies[freq + 1].Add(valueToAdd);
+                    frequencies[1].Add(valueToAdd);
                 }
                 else
                 {
-                    frequencies[freq + 1] = new List<int> { valueToAdd };
+                    frequencies[1] = new HashSet<int> { valueToAdd };
                 }
             }
         }
@@ -92,25 +101,33 @@ namespace CommandLibraries
 
             if (currentState.TryGetValue(valueToRemove, out freq))
             {
-                frequencies[freq].Remove(valueToRemove);
-
-                currentState[valueToRemove] = freq - 1;
-
-                if (frequencies.ContainsKey(freq - 1))
+                if (freq > 0)
                 {
-                    frequencies[freq - 1].Add(valueToRemove);
-                }
-                else
-                {
-                    frequencies[freq - 1] = new List<int> { valueToRemove };
-                }
+                    frequencies[freq].Remove(valueToRemove);
 
-            }
+                    if (freq > 1)
+                    {
+                        currentState[valueToRemove] = freq - 1;
+                    }
+                    else
+                    {
+                        currentState.Remove(valueToRemove);
+                    }
+
+                    if (freq > 1)
+                    {
+                        if (frequencies.ContainsKey(freq - 1))
+                            frequencies[freq - 1].Add(valueToRemove);
+                        else
+                            frequencies[freq - 1] = new HashSet<int> {valueToRemove};
+                    }
+                }
+            }    
         }
         //Check if any integer is present whose frequency is exactly x. If yes, print 1 else 0.
         private void QueryValue(int freqToMatch, List<int> results)
         {
-            List<int> values;
+            HashSet<int> values;
 
             if (frequencies.TryGetValue(
                 freqToMatch,

@@ -7,13 +7,45 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="biginput.txt" />
+    <None Remove="bigoutput.txt" />
+    <None Remove="input00.txt" />
+    <None Remove="output00.txt" />
+    <None Remove="TestData\input01.txt" />
+    <None Remove="TestData\input11.txt" />
+    <None Remove="TestData\input14.txt" />
+    <None Remove="TestData\output01.txt" />
+    <None Remove="TestData\output11.txt" />
+    <None Remove="TestData\output14.txt" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="TestData\bigoutput.txt" />
+    <EmbeddedResource Include="TestData\input11.txt" />
+    <EmbeddedResource Include="TestData\input14.txt" />
+    <EmbeddedResource Include="TestData\input01.txt" />
+    <EmbeddedResource Include="TestData\output11.txt" />
+    <EmbeddedResource Include="TestData\output14.txt" />
+    <EmbeddedResource Include="TestData\output01.txt" />
+    <EmbeddedResource Include="TestData\output00.txt" />
+    <EmbeddedResource Include="TestData\input00.txt" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="nunit" Version="3.12.0" />
-    <PackageReference Include="NUnit3TestAdapter" Version="3.13.0" />
-    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.2.0" />
+    <PackageReference Include="NUnit3TestAdapter" Version="3.16.1">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.5.0" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\CommandProcessor\CommandProcessor.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="TestData\biginput.txt" />
   </ItemGroup>
 
 </Project>
