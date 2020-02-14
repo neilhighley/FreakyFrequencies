@@ -60,6 +60,18 @@ namespace Tests
         }
 
         [Test]
+        public void TestScenario11()
+        {
+            var inputs = readInputResource(input11ResourceName);
+
+            var expectedOutputs = readOutputResource(output11ResourceName);
+
+            var processor = new CommandProcessor();
+
+            CollectionAssert.AreEqual(expectedOutputs, processor.ProcessQueries(inputs));
+        }
+
+        [Test]
         public void Test1()
         {
             var input = new List<List<int>>{
@@ -87,6 +99,8 @@ namespace Tests
         private const string output01ResourceName = @"NUnitTestProject1.TestData.output01.txt";
         private const string input14ResourceName = @"NUnitTestProject1.TestData.input14.txt";
         private const string output14ResourceName = @"NUnitTestProject1.TestData.output14.txt";
+        private const string input11ResourceName = @"NUnitTestProject1.TestData.input11.txt";
+        private const string output11ResourceName = @"NUnitTestProject1.TestData.output11.txt";
 
         private List<int> readOutputResource(string resourceName)
         {
