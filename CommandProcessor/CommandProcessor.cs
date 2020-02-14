@@ -7,7 +7,7 @@ namespace CommandLibraries
     {
         private Dictionary<int, int> currentState = new Dictionary<int, int>();
 
-        private Dictionary<int, List<int>> frequencies = new Dictionary<int, List<int>>();//[num,v]
+        private Dictionary<int, HashSet<int>> frequencies = new Dictionary<int, HashSet<int>>();//[num,v]
 
         private Dictionary<int, Action<int, List<int>>> commands;
 
@@ -68,6 +68,7 @@ namespace CommandLibraries
                 out freq))
             {
                 frequencies[freq].Remove(valueToAdd);
+
                 currentState[valueToAdd] = freq + 1;
 
                 if (frequencies.ContainsKey(freq + 1))
@@ -76,7 +77,7 @@ namespace CommandLibraries
                 }
                 else
                 {
-                    frequencies[freq + 1] = new List<int> { valueToAdd };
+                    frequencies[freq + 1] = new HashSet<int>(){ valueToAdd };
                 }
             }
             else
@@ -89,7 +90,7 @@ namespace CommandLibraries
                 }
                 else
                 {
-                    frequencies[1] = new List<int> { valueToAdd };
+                    frequencies[1] = new HashSet<int> { valueToAdd };
                 }
             }
         }
@@ -100,25 +101,33 @@ namespace CommandLibraries
 
             if (currentState.TryGetValue(valueToRemove, out freq))
             {
-                frequencies[freq].Remove(valueToRemove);
-
-                currentState[valueToRemove] = freq - 1;
-
-                if (frequencies.ContainsKey(freq - 1))
+                if (freq > 0)
                 {
-                    frequencies[freq - 1].Add(valueToRemove);
-                }
-                else
-                {
-                    frequencies[freq - 1] = new List<int> { valueToRemove };
-                }
+                    frequencies[freq].Remove(valueToRemove);
 
-            }
+                    if (freq > 1)
+                    {
+                        currentState[valueToRemove] = freq - 1;
+                    }
+                    else
+                    {
+                        currentState.Remove(valueToRemove);
+                    }
+
+                    if (freq > 1)
+                    {
+                        if (frequencies.ContainsKey(freq - 1))
+                            frequencies[freq - 1].Add(valueToRemove);
+                        else
+                            frequencies[freq - 1] = new HashSet<int> {valueToRemove};
+                    }
+                }
+            }    
         }
         //Check if any integer is present whose frequency is exactly x. If yes, print 1 else 0.
         private void QueryValue(int freqToMatch, List<int> results)
         {
-            List<int> values;
+            HashSet<int> values;
 
             if (frequencies.TryGetValue(
                 freqToMatch,
